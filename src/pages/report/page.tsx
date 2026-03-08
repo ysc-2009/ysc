@@ -15,7 +15,6 @@ interface ReportItem {
   image: string;
 }
 
-// Googleスプレッドシートを「ウェブに公開（CSV形式）」したURLをここに設定してください
 // 列順: A列=日付, B列=カテゴリ, C列=タイトル, D列=内容, E列=画像URL
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1E0cY44BsBwalv3RZkzzdxaHLrA5nb52FAiW_jdVyZE0/pub?gid=0&single=true&output=csv";
@@ -23,7 +22,6 @@ const SHEET_URL =
 // Googleドライブの画像URLを表示可能な形式に変換
 function convertGoogleDriveUrl(url: string): string {
   if (!url) return "";
-  // /file/d/FILE_ID/view 形式を検出
   const match = url.match(/\/file\/d\/([^/]+)/);
   if (match) {
     return `https://drive.google.com/uc?export=view&id=${match[1]}`;
@@ -49,79 +47,6 @@ function parseReportCSV(text: string): ReportItem[] {
     })
     .filter((item) => item.title);
 }
-
-const fallbackReports: ReportItem[] = [
-  {
-    id: 1,
-    category: "soccer",
-    date: "2026/03/08",
-    title: "交流試合",
-    excerpt:
-      "智弁学園小学校との交流試合を開催しました!\n安原小学校グラウンドにて、智弁学園小学校のみなさんと交流試合を行いました。子どもたちは全力でプレーし、たくさんの笑顔があふれました。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award1.jpg",
-  },
-  {
-    id: 2,
-    category: "soccer",
-    date: "2026/02/15",
-    title: "サッカー教室",
-    excerpt:
-      "毎週土曜日のサッカー教室の様子です。基礎練習からミニゲームまで、楽しく活動しています。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award2.jpg",
-  },
-  {
-    id: 3,
-    category: "onigokko",
-    date: "2026/02/10",
-    title: "スポーツ鬼ごっこ大会",
-    excerpt:
-      "地域のスポーツ鬼ごっこ大会に参加しました。チームワークを発揮して頑張りました！",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award1.jpg",
-  },
-  {
-    id: 4,
-    category: "dance",
-    date: "2026/01/28",
-    title: "ジャズダンス発表会",
-    excerpt:
-      "東部コミュニティセンターでジャズダンスの発表会を開催しました。練習の成果を披露できました。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award2.jpg",
-  },
-  {
-    id: 5,
-    category: "tennis",
-    date: "2026/01/20",
-    title: "ショートテニス練習",
-    excerpt:
-      "ショートテニス教室の練習風景です。初心者から経験者まで楽しく活動しています。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award1.jpg",
-  },
-  {
-    id: 6,
-    category: "yoga",
-    date: "2026/01/15",
-    title: "ヨガ教室",
-    excerpt: "毎週火曜日のヨガ教室。心身ともにリフレッシュできる時間です。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award2.jpg",
-  },
-  {
-    id: 7,
-    category: "event",
-    date: "2025/12/25",
-    title: "クリスマスイベント",
-    excerpt:
-      "年末のクリスマスイベントを開催しました。子どもたちと楽しい時間を過ごしました。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award1.jpg",
-  },
-  {
-    id: 8,
-    category: "athletic",
-    date: "2025/12/10",
-    title: "アスレチック教室",
-    excerpt: "体を動かす楽しさを体験するアスレチック教室の様子です。",
-    image: "https://ysc-2009.github.io/ysc.github.io/img/award2.jpg",
-  },
-];
 
 const filters = [
   { id: "all", label: "すべて", icon: "grid_view" },
@@ -162,7 +87,8 @@ const getCategoryLabel = (category: string) => {
 
 export default function ReportPage() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [reports, setReports] = useState<ReportItem[]>(fallbackReports);
+  const [reports, setReports] = useState<ReportItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const filterRef = useScrollAnimation();
   const itemRef = useScrollAnimationList();
 
@@ -172,9 +98,10 @@ export default function ReportPage() {
       .then((res) => res.text())
       .then((text) => {
         const parsed = parseReportCSV(text);
-        if (parsed.length > 0) setReports(parsed);
+        setReports(parsed);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   const filteredReports =
@@ -229,46 +156,56 @@ export default function ReportPage() {
           ))}
         </div>
 
-        {/* Reports Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredReports.map((report) => (
-            <div
-              key={report.id}
-              ref={itemRef}
-              className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer opacity-0 translate-y-8"
-            >
-              <div className="relative h-56 overflow-hidden bg-gradient-to-br from-sky-100 to-blue-100">
-                {report.image && (
-                  <img
-                    src={report.image}
-                    alt={report.title}
-                    className="w-full h-full object-cover object-top"
-                  />
-                )}
-              </div>
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-gray-500 font-medium">
-                    {report.date}
-                  </span>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(report.category)}`}
-                  >
-                    {getCategoryLabel(report.category)}
-                  </span>
-                </div>
-                <h3 className="text-xl font-black text-gray-900 mb-3">
-                  {report.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
-                  {report.excerpt}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Loading */}
+        {loading && (
+          <div className="text-center py-20">
+            <div className="w-16 h-16 border-4 border-[#0ea5e9] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-500">読み込み中...</p>
+          </div>
+        )}
 
-        {filteredReports.length === 0 && (
+        {/* Reports Grid */}
+        {!loading && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredReports.map((report) => (
+              <div
+                key={report.id}
+                ref={itemRef}
+                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer opacity-0 translate-y-8"
+              >
+                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-sky-100 to-blue-100">
+                  {report.image && (
+                    <img
+                      src={report.image}
+                      alt={report.title}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  )}
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm text-gray-500 font-medium">
+                      {report.date}
+                    </span>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(report.category)}`}
+                    >
+                      {getCategoryLabel(report.category)}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-black text-gray-900 mb-3">
+                    {report.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                    {report.excerpt}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!loading && filteredReports.length === 0 && (
           <div className="text-center py-20">
             <div className="w-20 h-20 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="material-symbols-rounded text-[#0ea5e9] text-4xl">
