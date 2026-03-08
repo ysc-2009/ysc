@@ -29,22 +29,65 @@ function convertGoogleDriveUrl(url: string): string {
   return url;
 }
 
+// 改行を含むフィールドに対応したCSVパーサー
 function parseReportCSV(text: string): ReportItem[] {
-  const lines = text.trim().split("\n");
-  if (lines.length < 2) return [];
-  return lines
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (char === '"' && next === '"') {
+        field += '"';
+        i++;
+      } else if (char === '"') {
+        inQuotes = false;
+      } else {
+        field += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ",") {
+        row.push(field.trim());
+        field = "";
+      } else if (char === "\r" && next === "\n") {
+        row.push(field.trim());
+        rows.push(row);
+        row = [];
+        field = "";
+        i++;
+      } else if (char === "\n" || char === "\r") {
+        row.push(field.trim());
+        rows.push(row);
+        row = [];
+        field = "";
+      } else {
+        field += char;
+      }
+    }
+  }
+  if (field || row.length > 0) {
+    row.push(field.trim());
+    rows.push(row);
+  }
+
+  if (rows.length < 2) return [];
+
+  return rows
     .slice(1)
-    .map((line, idx) => {
-      const cols = line.split(",").map((c) => c.trim().replace(/^"|"$/g, ""));
-      return {
-        id: idx + 1,
-        date: cols[0] || "",
-        category: cols[1] || "event",
-        title: cols[2] || "",
-        excerpt: cols[3] || "",
-        image: convertGoogleDriveUrl(cols[4] || ""),
-      };
-    })
+    .map((cols, idx) => ({
+      id: idx + 1,
+      date: cols[0] || "",
+      category: cols[1] || "event",
+      title: cols[2] || "",
+      excerpt: cols[3] || "",
+      image: convertGoogleDriveUrl(cols[4] || ""),
+    }))
     .filter((item) => item.title);
 }
 
@@ -113,7 +156,6 @@ export default function ReportPage() {
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       <Header />
 
-      {/* Page Hero */}
       <div className="relative bg-gradient-to-br from-[#0ea5e9] via-[#38bdf8] to-[#7dd3fc] text-white pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
