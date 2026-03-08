@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "../home/components/Header";
 import Footer from "../home/components/Footer";
-import {
-  useScrollAnimation,
-  useScrollAnimationList,
-} from "../../hooks/useScrollAnimation";
+import { useScrollAnimation } from "../../hooks/useScrollAnimation";
 
 interface ReportItem {
   id: number;
@@ -133,7 +130,6 @@ export default function ReportPage() {
   const [reports, setReports] = useState<ReportItem[]>([]);
   const [loading, setLoading] = useState(true);
   const filterRef = useScrollAnimation();
-  const itemRef = useScrollAnimationList();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -206,14 +202,13 @@ export default function ReportPage() {
           </div>
         )}
 
-        {/* Reports Grid */}
+        {/* Reports Grid - アニメーションなし */}
         {!loading && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredReports.map((report) => (
               <div
                 key={report.id}
-                ref={itemRef}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer opacity-0 translate-y-8"
+                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
               >
                 <div className="relative h-56 overflow-hidden bg-gradient-to-br from-sky-100 to-blue-100">
                   {report.image && (
