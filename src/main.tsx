@@ -7,7 +7,7 @@ import { HashRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <HashRouter>
+    <HashRouter basename={__BASE_PATH__}>
       <App />
     </HashRouter>
   </StrictMode>,
