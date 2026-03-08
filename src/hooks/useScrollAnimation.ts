@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from "react";
 
 // 単一要素用
 export function useScrollAnimation() {
@@ -12,15 +12,15 @@ export function useScrollAnimation() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            entry.target.classList.remove('opacity-0', 'translate-y-8');
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-8");
           }
         });
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
+        rootMargin: "0px 0px -50px 0px",
+      },
     );
 
     observer.observe(element);
@@ -35,32 +35,37 @@ export function useScrollAnimation() {
 
 // 複数要素用（.map() 内で ref を渡す用途）
 export function useScrollAnimationList() {
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const elementsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            entry.target.classList.remove('opacity-0', 'translate-y-8');
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-8");
           }
         });
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
+        rootMargin: "0px 0px -50px 0px",
+      },
     );
 
+    // useEffect実行時点で溜まっている要素をすべてobserve
+    elementsRef.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
     return () => {
-      observerRef.current?.disconnect();
+      observer.disconnect();
     };
   }, []);
 
   const itemRef = useCallback((el: HTMLDivElement | null) => {
-    if (el && observerRef.current) {
-      observerRef.current.observe(el);
+    if (el && !elementsRef.current.includes(el)) {
+      elementsRef.current.push(el);
     }
   }, []);
 
