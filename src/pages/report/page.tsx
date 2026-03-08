@@ -17,7 +17,7 @@ interface ReportItem {
 
 // 列順: A列=日付, B列=カテゴリ, C列=タイトル, D列=内容, E列=画像URL
 const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/1E0cY44BsBwalv3RZkzzdxaHLrA5nb52FAiW_jdVyZE0/pub?gid=0&single=true&output=csv";
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlOLKrKA6Sp84NbVY1NCfgoDyk0SR0uZm8qQCowEjF8VtvRi48mzeV5ADONuA4v3oupPZUqODFuHcO/pub?gid=684271530&single=true&output=csv";
 
 // Googleドライブの画像URLを表示可能な形式に変換
 function convertGoogleDriveUrl(url: string): string {
