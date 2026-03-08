@@ -10,7 +10,12 @@ export default function Footer() {
                 <i className="ri-trophy-line text-2xl"></i>
               </div>
               <div>
-                <h3 className="text-xl font-black" style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}>安原スポーツクラブ</h3>
+                <h3
+                  className="text-xl font-black"
+                  style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}
+                >
+                  安原スポーツクラブ
+                </h3>
               </div>
             </div>
             <p className="text-sm text-white/80 leading-relaxed">
@@ -20,30 +25,50 @@ export default function Footer() {
 
           {/* Menu Links */}
           <div>
-            <h4 className="text-lg font-black mb-4" style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}>MENU</h4>
+            <h4
+              className="text-lg font-black mb-4"
+              style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}
+            >
+              MENU
+            </h4>
             <ul className="space-y-2">
               <li>
-                <a href="/about" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/about"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   クラブ紹介
                 </a>
               </li>
               <li>
-                <a href="/info" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/info"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   活動内容
                 </a>
               </li>
               <li>
-                <a href="/report" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/report"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   活動報告
                 </a>
               </li>
               <li>
-                <a href="/trial" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/trial"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   体験・入会
                 </a>
               </li>
               <li>
-                <a href="/rules" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/rules"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   会則
                 </a>
               </li>
@@ -52,15 +77,26 @@ export default function Footer() {
 
           {/* Support Links */}
           <div>
-            <h4 className="text-lg font-black mb-4" style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}>SUPPORT</h4>
+            <h4
+              className="text-lg font-black mb-4"
+              style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}
+            >
+              SUPPORT
+            </h4>
             <ul className="space-y-2">
               <li>
-                <a href="/members" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/members"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   会員様向け
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer">
+                <a
+                  href="/contact"
+                  className="text-sm text-white/80 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
                   お問い合わせ
                 </a>
               </li>
@@ -69,7 +105,12 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-black mb-4" style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}>CONTACT</h4>
+            <h4
+              className="text-lg font-black mb-4"
+              style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}
+            >
+              CONTACT
+            </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <i className="ri-phone-line text-lg mt-0.5"></i>
@@ -80,7 +121,9 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <i className="ri-mail-line text-lg mt-0.5"></i>
-                <p className="text-sm text-white/80 break-all">hidenoribaba@hotmail.com</p>
+                <p className="text-sm text-white/80 break-all">
+                  hidenoribaba@hotmail.com
+                </p>
               </li>
             </ul>
           </div>
@@ -91,9 +134,7 @@ export default function Footer() {
           <p className="text-sm text-white/70">
             Copyright © 安原スポーツクラブ All Rights Reserved.
           </p>
-          <p className="text-xs text-white/50 mt-2">
-            Web Design: YasuharaSportsClub
-          </p>
+          <p className="text-xs text-white/50 mt-2">Web Design: ysc</p>
         </div>
       </div>
     </footer>
