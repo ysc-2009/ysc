@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom'; // ← 追加
 import Header from '../home/components/Header';
 import Footer from '../home/components/Footer';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
@@ -199,7 +200,7 @@ export default function MembersPage() {
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 mt-4 text-center">
-                  詳細は<a href="/info" className="text-sky-600 hover:text-sky-700 font-bold">活動内容ページ</a>をご参照ください
+                  詳細は<Link to="/info" className="text-sky-600 hover:text-sky-700 font-bold">活動内容ページ</Link>をご参照ください {/* ← a→Link, href→to */}
                 </p>
               </div>
             </div>
@@ -287,12 +288,7 @@ export default function MembersPage() {
               <h2 className="text-4xl font-black text-gray-800" style={{ fontFamily: "'Rounded Mplus 1c', sans-serif" }}>リンク集</h2>
             </div>
             <div className="space-y-4">
-              <a 
-                href="https://m.facebook.com/%E3%82%8F%E3%81%8B%E3%82%84%E3%81%BE%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E9%AC%BC%E3%81%94%E3%81%A3%E3%81%93%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-424943247884776/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group"
-              >
+              <a href="https://m.facebook.com/%E3%82%8F%E3%81%8B%E3%82%84%E3%81%BE%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84%E9%AC%AC%E3%81%94%E3%81%A3%E3%81%93%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-424943247884776/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group">
                 <div className="w-14 h-14 flex items-center justify-center bg-blue-100 rounded-xl flex-shrink-0 group-hover:bg-blue-200 transition-colors">
                   <i className="ri-facebook-fill text-3xl text-blue-600"></i>
                 </div>
@@ -302,13 +298,7 @@ export default function MembersPage() {
                 </div>
                 <i className="ri-arrow-right-line text-2xl text-gray-400 group-hover:text-sky-600 transition-colors"></i>
               </a>
-
-              <a 
-                href="http://www.onigokko.or.jp/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group"
-              >
+              <a href="http://www.onigokko.or.jp/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group">
                 <div className="w-14 h-14 flex items-center justify-center bg-orange-100 rounded-xl flex-shrink-0 group-hover:bg-orange-200 transition-colors">
                   <i className="ri-run-line text-3xl text-orange-600"></i>
                 </div>
@@ -318,13 +308,7 @@ export default function MembersPage() {
                 </div>
                 <i className="ri-arrow-right-line text-2xl text-gray-400 group-hover:text-sky-600 transition-colors"></i>
               </a>
-
-              <a 
-                href="http://kidslete.ikora.tv/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group"
-              >
+              <a href="http://kidslete.ikora.tv/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group">
                 <div className="w-14 h-14 flex items-center justify-center bg-green-100 rounded-xl flex-shrink-0 group-hover:bg-green-200 transition-colors">
                   <i className="ri-global-line text-3xl text-green-600"></i>
                 </div>
@@ -334,13 +318,7 @@ export default function MembersPage() {
                 </div>
                 <i className="ri-arrow-right-line text-2xl text-gray-400 group-hover:text-sky-600 transition-colors"></i>
               </a>
-
-              <a 
-                href="http://onigokkoyasuharasc.ikora.tv/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group"
-              >
+              <a href="http://onigokkoyasuharasc.ikora.tv/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group">
                 <div className="w-14 h-14 flex items-center justify-center bg-red-100 rounded-xl flex-shrink-0 group-hover:bg-red-200 transition-colors">
                   <i className="ri-basketball-line text-3xl text-red-600"></i>
                 </div>
@@ -350,13 +328,7 @@ export default function MembersPage() {
                 </div>
                 <i className="ri-arrow-right-line text-2xl text-gray-400 group-hover:text-sky-600 transition-colors"></i>
               </a>
-
-              <a 
-                href="https://www.instagram.com/yasuhara_sports_club/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group"
-              >
+              <a href="https://www.instagram.com/yasuhara_sports_club/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all group">
                 <div className="w-14 h-14 flex items-center justify-center bg-pink-100 rounded-xl flex-shrink-0 group-hover:bg-pink-200 transition-colors">
                   <i className="ri-instagram-line text-3xl text-pink-600"></i>
                 </div>

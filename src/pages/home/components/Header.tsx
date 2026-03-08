@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom'; // ← Link追加
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +33,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <a href="/" className="flex items-center gap-3 cursor-pointer">
+            <Link to="/" className="flex items-center gap-3 cursor-pointer"> {/* ← a→Link, href→to */}
               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                 isScrolled ? 'bg-[#0ea5e9]' : 'bg-white/20 backdrop-blur-sm'
               }`}>
@@ -47,13 +47,13 @@ export default function Header() {
                   総合型地域スポーツクラブ・和歌山
                 </span>
               </div>
-            </a>
+            </Link> {/* ← /a→/Link */}
 
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
-                <a
+                <Link  {/* ← a→Link */}
                   key={link.href}
-                  href={link.href}
+                  to={link.href}  {/* ← href→to */}
                   className={`px-4 py-2 text-sm font-bold rounded-lg transition-colors cursor-pointer whitespace-nowrap ${
                     location.pathname === link.href
                       ? isScrolled
@@ -65,15 +65,15 @@ export default function Header() {
                   }`}
                 >
                   {link.label}
-                </a>
+                </Link>  {/* ← /a→/Link */}
               ))}
-              <a
-                href="/trial"
+              <Link  {/* ← a→Link */}
+                to="/trial"  {/* ← href→to */}
                 className="ml-2 px-6 py-2 bg-[#0ea5e9] text-white text-sm font-bold rounded-full hover:bg-[#0284c7] transition-all duration-300 flex items-center gap-2 cursor-pointer whitespace-nowrap"
               >
                 <i className="ri-flashlight-line text-base"></i>
                 無料体験
-              </a>
+              </Link>  {/* ← /a→/Link */}
             </nav>
 
             <button
@@ -107,9 +107,9 @@ export default function Header() {
 
               <div className="mt-16 space-y-2">
                 {navLinks.map((link) => (
-                  <a
+                  <Link  {/* ← a→Link */}
                     key={link.href}
-                    href={link.href}
+                    to={link.href}  {/* ← href→to */}
                     className={`block px-4 py-3 text-base font-bold rounded-lg transition-colors cursor-pointer ${
                       location.pathname === link.href
                         ? 'text-[#0ea5e9] bg-sky-50'
@@ -118,16 +118,16 @@ export default function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
-                  </a>
+                  </Link>  {/* ← /a→/Link */}
                 ))}
-                <a
-                  href="/trial"
+                <Link  {/* ← a→Link */}
+                  to="/trial"  {/* ← href→to */}
                   className="block mt-6 px-6 py-3 bg-[#0ea5e9] text-white text-center font-bold rounded-full hover:bg-[#0284c7] transition-all cursor-pointer"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <i className="ri-flashlight-line text-base align-middle mr-2"></i>
                   無料体験はこちら
-                </a>
+                </Link>  {/* ← /a→/Link */}
               </div>
             </div>
           </div>

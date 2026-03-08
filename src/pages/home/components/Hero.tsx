@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // ← 追加
 
 const slides = [
-  'https://ysc-2009.github.io/ysc.github.io/images/top-slide1.jpg',
-  'https://ysc-2009.github.io/ysc.github.io/images/top-slide2.jpg',
-  'https://ysc-2009.github.io/ysc.github.io/images/top-slide3.jpg'
+  "https://ysc-2009.github.io/ysc.github.io/images/top-slide1.jpg",
+  "https://ysc-2009.github.io/ysc.github.io/images/top-slide2.jpg",
+  "https://ysc-2009.github.io/ysc.github.io/images/top-slide3.jpg",
 ];
 
 export default function Hero() {
@@ -25,8 +26,8 @@ export default function Hero() {
           style={{
             opacity: currentSlide === index ? 1 : 0,
             backgroundImage: `url(${slide})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
       ))}
@@ -34,35 +35,54 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50"></div>
 
       <div className="absolute top-24 right-8 w-16 h-16 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-        <span className="material-symbols-outlined text-white text-3xl">sports_soccer</span>
+        <span className="material-symbols-outlined text-white text-3xl">
+          sports_soccer
+        </span>
       </div>
 
       <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center w-full">
         <div className="max-w-3xl">
           <div className="flex items-center gap-2 mb-6">
             <div className="w-2 h-2 bg-[#38bdf8] rounded-full"></div>
-            <span className="text-white/90 text-sm font-medium">総合型地域スポーツクラブ・和歌山</span>
+            <span className="text-white/90 text-sm font-medium">
+              総合型地域スポーツクラブ・和歌山
+            </span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">
-            スポーツで<br />
-            <span className="text-[#38bdf8]">子どもの</span><br />
+            スポーツで
+            <br />
+            <span className="text-[#38bdf8]">子どもの</span>
+            <br />
             未来をひらく
           </h1>
 
           <p className="text-white/90 text-lg mb-8 leading-relaxed">
-            青少年の健全育成、健康・体力づくり、<br />
+            青少年の健全育成、健康・体力づくり、
+            <br />
             地域コミュニティの活性化を目指して。
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a href="/trial" className="px-8 py-4 bg-[#0ea5e9] text-white font-bold rounded-full hover:bg-[#0284c7] transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl cursor-pointer whitespace-nowrap">
+            <Link
+              to="/trial"
+              className="px-8 py-4 bg-[#0ea5e9] text-white font-bold rounded-full hover:bg-[#0284c7] transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl cursor-pointer whitespace-nowrap"
+            >
+              {" "}
+              {/* ← a→Link, href→to */}
               <span className="material-symbols-outlined">bolt</span>
               無料体験・入会はこちら
-            </a>
-            <a href="/about" className="px-8 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 transition-all duration-300 backdrop-blur-sm cursor-pointer whitespace-nowrap">
+            </Link>{" "}
+            {/* ← /a→/Link */}
+            <Link
+              to="/about"
+              className="px-8 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 transition-all duration-300 backdrop-blur-sm cursor-pointer whitespace-nowrap"
+            >
+              {" "}
+              {/* ← a→Link, href→to */}
               クラブについて
-            </a>
+            </Link>{" "}
+            {/* ← /a→/Link */}
           </div>
         </div>
       </div>
@@ -73,7 +93,7 @@ export default function Hero() {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`h-3 rounded-full transition-all cursor-pointer ${
-              currentSlide === index ? 'bg-white w-8' : 'bg-white/50 w-3'
+              currentSlide === index ? "bg-white w-8" : "bg-white/50 w-3"
             }`}
             aria-label={`スライド${index + 1}`}
           />
